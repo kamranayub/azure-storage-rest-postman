@@ -1,6 +1,6 @@
 # Azure Storage Postman Collection
 
-I've built a [Postman][getpostman] collection that can automatically generate the appropriate `Authorization` HTTP header with signature to sign requests. Used for my Pluralsight course, [Configuring CORS Access with Storage](https://github.com/kamranayub/pluralsight-azure-cors-storage)
+I've built a [Postman](https://getpostman.com/apps) collection that can automatically generate the appropriate `Authorization` HTTP header with signature to sign requests. Used for my Pluralsight course, [Configuring CORS Access with Storage](https://github.com/kamranayub/pluralsight-azure-cors-storage)
 
 To use the collection:
 
