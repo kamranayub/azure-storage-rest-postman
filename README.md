@@ -12,8 +12,8 @@ To use the collection:
 1. Edit the new collection using the "..." menu
 1. Go to the **Variables** tab
 1. Fill in the variables for:
-  - *azure_storage_account* - Your Azure Storage account name
-  - *azure_storage_key* - Your secret Storage key
+   - *azure_storage_account* - Your Azure Storage account name
+   - *azure_storage_key* - Your secret Storage key
 
 These two variable values can be found in the Azure Portal for your storage account. The rest of the variables will be filled in automatically.
 
