@@ -1,0 +1,634 @@
+{
+	"info": {
+		"_postman_id": "f279697b-ff90-4f56-bd89-6b81e46cf2e3",
+		"name": "Azure Storage REST API",
+		"description": "Methods to set, list, and remove properties for Azure Storage accounts via the Azure REST API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Set Blob Service Properties",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3d8a3bc5-d4f2-4583-bab1-2385cdf953f5",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{header_authorization}}"
+					},
+					{
+						"key": "x-ms-version",
+						"value": "2018-03-28"
+					},
+					{
+						"key": "x-ms-date",
+						"value": "{{header_date}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>  \r\n<StorageServiceProperties>\r\n    <Cors>  \r\n        <CorsRule>  \r\n            <AllowedOrigins>http://localhost:5000</AllowedOrigins>  \r\n            <AllowedMethods>GET</AllowedMethods>  \r\n            <MaxAgeInSeconds>10</MaxAgeInSeconds>  \r\n            <ExposedHeaders>x-ms-request-id,x-ms-lease-status</ExposedHeaders>  \r\n            <AllowedHeaders>x-api-key</AllowedHeaders>  \r\n        </CorsRule>\r\n        <CorsRule>  \r\n            <AllowedOrigins>http://localhost:5001</AllowedOrigins>  \r\n            <AllowedMethods>GET,HEAD</AllowedMethods>  \r\n            <MaxAgeInSeconds>5</MaxAgeInSeconds>  \r\n            <ExposedHeaders>x-*</ExposedHeaders>  \r\n            <AllowedHeaders>content-type</AllowedHeaders>  \r\n        </CorsRule>\r\n        <CorsRule>  \r\n            <AllowedOrigins>http://localhost:5000,http://localhost:5001</AllowedOrigins>  \r\n            <AllowedMethods>POST</AllowedMethods>  \r\n            <MaxAgeInSeconds>5</MaxAgeInSeconds>  \r\n            <ExposedHeaders>*</ExposedHeaders>  \r\n            <AllowedHeaders>x-api-key,x-app-*</AllowedHeaders>  \r\n        </CorsRule>\r\n        <CorsRule>  \r\n            <AllowedOrigins>*</AllowedOrigins>  \r\n            <AllowedMethods>GET</AllowedMethods>  \r\n            <MaxAgeInSeconds>30</MaxAgeInSeconds>  \r\n            <ExposedHeaders>*</ExposedHeaders>  \r\n            <AllowedHeaders>*</AllowedHeaders>  \r\n        </CorsRule>\r\n    </Cors>\r\n</StorageServiceProperties>"
+				},
+				"url": {
+					"raw": "https://{{azure_storage_account}}.blob.core.windows.net/?restype=service&comp=properties",
+					"protocol": "https",
+					"host": [
+						"{{azure_storage_account}}",
+						"blob",
+						"core",
+						"windows",
+						"net"
+					],
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "restype",
+							"value": "service"
+						},
+						{
+							"key": "comp",
+							"value": "properties"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Blob Service Properties",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ms-date",
+						"value": "{{header_date}}"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{header_authorization}}"
+					},
+					{
+						"key": "x-ms-version",
+						"value": "2018-03-28"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://{{azure_storage_account}}.blob.core.windows.net/?restype=service&comp=properties",
+					"protocol": "https",
+					"host": [
+						"{{azure_storage_account}}",
+						"blob",
+						"core",
+						"windows",
+						"net"
+					],
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "restype",
+							"value": "service",
+							"description": "Required. The combination of both query strings is required to get the storage service properties."
+						},
+						{
+							"key": "comp",
+							"value": "properties",
+							"description": "Required. The combination of both query strings is required to get the storage service properties."
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Preflight Blob Request",
+			"request": {
+				"method": "OPTIONS",
+				"header": [
+					{
+						"key": "x-ms-date",
+						"value": "{{header_date}}"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{header_authorization}}",
+						"disabled": true
+					},
+					{
+						"key": "x-ms-version",
+						"value": "2018-03-28"
+					},
+					{
+						"key": "Origin",
+						"value": "http://localhost:5000"
+					},
+					{
+						"key": "Access-Control-Request-Method",
+						"value": "GET"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://{{azure_storage_account}}.blob.core.windows.net/staticsite/img1.jpg",
+					"protocol": "https",
+					"host": [
+						"{{azure_storage_account}}",
+						"blob",
+						"core",
+						"windows",
+						"net"
+					],
+					"path": [
+						"staticsite",
+						"img1.jpg"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GET from localhost:5000 should succeed",
+					"originalRequest": {
+						"method": "OPTIONS",
+						"header": [
+							{
+								"key": "x-ms-date",
+								"value": "{{header_date}}",
+								"disabled": false
+							},
+							{
+								"key": "Authorization",
+								"value": "{{header_authorization}}",
+								"disabled": true
+							},
+							{
+								"key": "x-ms-version",
+								"value": "2018-03-28",
+								"disabled": false
+							},
+							{
+								"key": "Origin",
+								"value": "http://localhost:5000",
+								"disabled": false
+							},
+							{
+								"key": "Access-Control-Request-Method",
+								"value": "GET",
+								"disabled": false
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://{{azure_storage_account}}.blob.core.windows.net/staticsite/img1.jpg",
+							"protocol": "https",
+							"host": [
+								"{{azure_storage_account}}",
+								"blob",
+								"core",
+								"windows",
+								"net"
+							],
+							"path": [
+								"staticsite",
+								"img1.jpg"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"name": "Access-Control-Allow-Credentials",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET",
+							"name": "Access-Control-Allow-Methods",
+							"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost:5000",
+							"name": "Access-Control-Allow-Origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "10",
+							"name": "Access-Control-Max-Age",
+							"description": "Indicates how long the results of a preflight request can be cached in seconds."
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 28 Sep 2018 03:57:37 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						},
+						{
+							"key": "x-ms-request-id",
+							"value": "ee788b85-f01e-001c-4edf-561cff000000",
+							"name": "x-ms-request-id",
+							"description": "Custom header"
+						},
+						{
+							"key": "x-ms-version",
+							"value": "2018-03-28",
+							"name": "x-ms-version",
+							"description": "Custom header"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "GET from localhost:5000 with non-allowed header should fail",
+					"originalRequest": {
+						"method": "OPTIONS",
+						"header": [
+							{
+								"key": "x-ms-date",
+								"value": "{{header_date}}",
+								"disabled": false
+							},
+							{
+								"key": "Authorization",
+								"value": "{{header_authorization}}",
+								"disabled": true
+							},
+							{
+								"key": "x-ms-version",
+								"value": "2018-03-28",
+								"disabled": false
+							},
+							{
+								"key": "Origin",
+								"value": "http://localhost:5000",
+								"disabled": false
+							},
+							{
+								"key": "Access-Control-Request-Method",
+								"value": "GET",
+								"disabled": false
+							},
+							{
+								"key": "Access-Control-Request-Headers",
+								"value": "x-app-neat-header",
+								"disabled": false
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://{{azure_storage_account}}.blob.core.windows.net/staticsite/img1.jpg",
+							"protocol": "https",
+							"host": [
+								"{{azure_storage_account}}",
+								"blob",
+								"core",
+								"windows",
+								"net"
+							],
+							"path": [
+								"staticsite",
+								"img1.jpg"
+							]
+						}
+					},
+					"status": "CORS not enabled or no matching rule found for this request.",
+					"code": 403,
+					"_postman_previewlanguage": "xml",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "316",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/xml",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 28 Sep 2018 04:03:51 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "x-ms-error-code",
+							"value": "CorsPreflightFailure",
+							"name": "x-ms-error-code",
+							"description": "Custom header"
+						},
+						{
+							"key": "x-ms-request-id",
+							"value": "c32787d6-501e-005e-39e0-5637eb000000",
+							"name": "x-ms-request-id",
+							"description": "Custom header"
+						},
+						{
+							"key": "x-ms-version",
+							"value": "2018-03-28",
+							"name": "x-ms-version",
+							"description": "Custom header"
+						}
+					],
+					"cookie": [],
+					"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?><Error><Code>CorsPreflightFailure</Code><Message>CORS not enabled or no matching rule found for this request.\nRequestId:c32787d6-501e-005e-39e0-5637eb000000\nTime:2018-09-28T04:03:51.3198801Z</Message><MessageDetails>No CORS rules matches this request</MessageDetails></Error>"
+				},
+				{
+					"name": "HEAD from any origin should fail",
+					"originalRequest": {
+						"method": "OPTIONS",
+						"header": [
+							{
+								"key": "x-ms-date",
+								"value": "{{header_date}}",
+								"disabled": false
+							},
+							{
+								"key": "Authorization",
+								"value": "{{header_authorization}}",
+								"disabled": true
+							},
+							{
+								"key": "x-ms-version",
+								"value": "2018-03-28",
+								"disabled": false
+							},
+							{
+								"key": "Origin",
+								"value": "http://contoso.com",
+								"disabled": false
+							},
+							{
+								"key": "Access-Control-Request-Method",
+								"value": "HEAD",
+								"disabled": false
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://{{azure_storage_account}}.blob.core.windows.net/staticsite/img1.jpg",
+							"protocol": "https",
+							"host": [
+								"{{azure_storage_account}}",
+								"blob",
+								"core",
+								"windows",
+								"net"
+							],
+							"path": [
+								"staticsite",
+								"img1.jpg"
+							]
+						}
+					},
+					"status": "CORS not enabled or no matching rule found for this request.",
+					"code": 403,
+					"_postman_previewlanguage": "xml",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "316",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/xml",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 28 Sep 2018 04:02:09 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "x-ms-error-code",
+							"value": "CorsPreflightFailure",
+							"name": "x-ms-error-code",
+							"description": "Custom header"
+						},
+						{
+							"key": "x-ms-request-id",
+							"value": "c32726a0-501e-005e-68e0-5637eb000000",
+							"name": "x-ms-request-id",
+							"description": "Custom header"
+						},
+						{
+							"key": "x-ms-version",
+							"value": "2018-03-28",
+							"name": "x-ms-version",
+							"description": "Custom header"
+						}
+					],
+					"cookie": [],
+					"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?><Error><Code>CorsPreflightFailure</Code><Message>CORS not enabled or no matching rule found for this request.\nRequestId:c32726a0-501e-005e-68e0-5637eb000000\nTime:2018-09-28T04:02:09.9084351Z</Message><MessageDetails>No CORS rules matches this request</MessageDetails></Error>"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "d25d987b-a9a5-4b4c-a1a3-54ac508b8bf5",
+				"type": "text/javascript",
+				"exec": [
+					"const crypto = require(\"crypto-js\");",
+					"",
+					"// Set Date header value for authorization",
+					"// Should be UTC GMT string",
+					"pm.variables.set(\"header_date\", new Date().toUTCString());",
+					"",
+					"// Sadness: https://github.com/postmanlabs/postman-app-support/issues/2922",
+					"var substituteEnvVars = function (varStr) {",
+					"    let match;",
+					"    let replacedVar = varStr;",
+					"    ",
+					"    while ((match = /\\{\\{([^{}]*?)}}/g.exec(replacedVar)) !== null ) {",
+					"        if (!pm.variables.get(match[1])) {",
+					"            continue;",
+					"        }",
+					"        var envVar = new RegExp(RegExp.escape(match[0]), 'g');",
+					"        replacedVar = replacedVar.replace(envVar, pm.variables.get(match[1]));",
+					"    }",
+					"    ",
+					"    return replacedVar;",
+					"};",
+					"",
+					"// Get hash of all header-name:value",
+					"const headers = pm.request.getHeaders({ ignoreCase: true, enabled: true });",
+					"",
+					"// Construct Signature value for Authorization header",
+					"var signatureParts = [",
+					"    pm.request.method.toUpperCase(),",
+					"    headers[\"content-encoding\"] || \"\",",
+					"    headers[\"content-language\"] || \"\",",
+					"    pm.request.body.toString().length || \"\",",
+					"    headers[\"content-md5\"] || \"\",",
+					"    headers[\"content-type\"] || \"\",",
+					"    headers[\"x-ms-date\"] ? \"\" : (pm.variables.get(\"header_date\") || \"\"),",
+					"    headers[\"if-modified-since\"] || \"\",",
+					"    headers[\"if-match\"] || \"\",",
+					"    headers[\"if-none-match\"] || \"\",",
+					"    headers[\"if-unmodified-since\"] || \"\",",
+					"    headers[\"range\"] || \"\"",
+					"];",
+					"",
+					"// Construct CanonicalizedHeaders",
+					"const canonicalHeaderNames = [];",
+					"Object.keys(headers).forEach(key => {",
+					"    if (key.startsWith(\"x-ms-\")) {",
+					"        canonicalHeaderNames.push(key);",
+					"    }",
+					"});",
+					"// Sort headers lexographically by name",
+					"canonicalHeaderNames.sort();",
+					"",
+					"const canonicalHeaderParts = [];",
+					"canonicalHeaderNames.forEach(key => {",
+					"    let value = pm.request.getHeaders({ ignoreCase: true, enabled: true })[key];",
+					"    ",
+					"    // Populate variables",
+					"    value = substituteEnvVars(value);",
+					"    ",
+					"    // Replace whitespace in value but not if its within quotes",
+					"    if (!value.startsWith(\"\\\"\")) {",
+					"        value = value.replace(/\\s+/, \" \");",
+					"    }",
+					"    ",
+					"    canonicalHeaderParts.push(`${key}:${value}`);",
+					"});",
+					"",
+					"// Add headers to signature",
+					"signatureParts.push.apply(signatureParts, canonicalHeaderParts);",
+					"",
+					"// Construct CanonicalizedResource",
+					"const canonicalResourceParts = [",
+					"    `/${pm.variables.get(\"azure_storage_account\")}${pm.request.url.getPath()}`",
+					"];",
+					"const canonicalQueryNames = [];",
+					"pm.request.url.query.each(query => {",
+					"    canonicalQueryNames.push(query.key.toLowerCase());",
+					"});",
+					"canonicalQueryNames.sort();",
+					"canonicalQueryNames.forEach(queryName => {",
+					"    const value = pm.request.url.query.get(queryName);",
+					"    ",
+					"    // NOTE: This does not properly explode multiple same query params' values",
+					"    // and turn them into comma-separated list",
+					"    canonicalResourceParts.push(`${queryName}:${value}`);",
+					"});",
+					"// Add resource to signature",
+					"signatureParts.push.apply(signatureParts, canonicalResourceParts);",
+					"",
+					"console.log(\"Signature Parts\", signatureParts);",
+					"",
+					"// Now, construct signature raw string",
+					"const signatureRaw = signatureParts.join(\"\\n\");",
+					"",
+					"console.log(\"Signature String\", JSON.stringify(signatureRaw));",
+					"",
+					"// Hash it using HMAC-SHA256 and then encode using base64",
+					"const storageKey = pm.variables.get(\"azure_storage_key\");",
+					"const signatureBytes = crypto.HmacSHA256(signatureRaw, crypto.enc.Base64.parse(storageKey));",
+					"const signatureEncoded = signatureBytes.toString(crypto.enc.Base64);",
+					"",
+					"console.log(\"Storage Account\", pm.variables.get(\"azure_storage_account\"));",
+					"console.log(\"Storage Key\", storageKey);",
+					"",
+					"// Finally, make it available for headers",
+					"pm.variables.set(\"header_authorization\", ",
+					"    `SharedKey ${pm.variables.get(\"azure_storage_account\")}:${signatureEncoded}`);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "fd3cd723-7868-470e-802c-eedf08a19c24",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "c5d71504-9c05-4d24-a5a8-bb1151ff6495",
+			"key": "azure_storage_account",
+			"value": "<storage_account>",
+			"type": "string"
+		},
+		{
+			"id": "9c56e7c7-2a5d-4597-b111-31646189f7ea",
+			"key": "azure_storage_key",
+			"value": "<storage_key>",
+			"type": "string"
+		},
+		{
+			"id": "245b3938-faaf-4b96-9f7d-0c2fdb773758",
+			"key": "header_date",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "3b5b8da4-5232-4e8a-9b62-e633ae694d87",
+			"key": "header_authorization",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
