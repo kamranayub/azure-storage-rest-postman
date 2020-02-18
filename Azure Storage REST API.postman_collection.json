@@ -89,7 +89,6 @@
 						"value": "2018-03-28"
 					}
 				],
-				"body": {},
 				"url": {
 					"raw": "https://{{azure_storage_account}}.blob.core.windows.net/?restype=service&comp=properties",
 					"protocol": "https",
@@ -146,7 +145,10 @@
 						"value": "GET"
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
 				"url": {
 					"raw": "https://{{azure_storage_account}}.blob.core.windows.net/staticsite/img1.jpg",
 					"protocol": "https",
@@ -195,7 +197,10 @@
 								"disabled": false
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
 						"url": {
 							"raw": "https://{{azure_storage_account}}.blob.core.windows.net/staticsite/img1.jpg",
 							"protocol": "https",
@@ -310,7 +315,10 @@
 								"disabled": false
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
 						"url": {
 							"raw": "https://{{azure_storage_account}}.blob.core.windows.net/staticsite/img1.jpg",
 							"protocol": "https",
@@ -408,7 +416,10 @@
 								"disabled": false
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
 						"url": {
 							"raw": "https://{{azure_storage_account}}.blob.core.windows.net/staticsite/img1.jpg",
 							"protocol": "https",
@@ -491,22 +502,6 @@
 					"// Should be UTC GMT string",
 					"pm.variables.set(\"header_date\", new Date().toUTCString());",
 					"",
-					"// Sadness: https://github.com/postmanlabs/postman-app-support/issues/2922",
-					"var substituteEnvVars = function (varStr) {",
-					"    let match;",
-					"    let replacedVar = varStr;",
-					"    ",
-					"    while ((match = /\\{\\{([^{}]*?)}}/g.exec(replacedVar)) !== null ) {",
-					"        if (!pm.variables.get(match[1])) {",
-					"            continue;",
-					"        }",
-					"        var envVar = new RegExp(RegExp.escape(match[0]), 'g');",
-					"        replacedVar = replacedVar.replace(envVar, pm.variables.get(match[1]));",
-					"    }",
-					"    ",
-					"    return replacedVar;",
-					"};",
-					"",
 					"// Get hash of all header-name:value",
 					"const headers = pm.request.getHeaders({ ignoreCase: true, enabled: true });",
 					"",
@@ -515,7 +510,7 @@
 					"    pm.request.method.toUpperCase(),",
 					"    headers[\"content-encoding\"] || \"\",",
 					"    headers[\"content-language\"] || \"\",",
-					"    pm.request.body.toString().length || \"\",",
+					"    pm.request.body ? pm.request.body.toString().length || \"\" : \"\",",
 					"    headers[\"content-md5\"] || \"\",",
 					"    headers[\"content-type\"] || \"\",",
 					"    headers[\"x-ms-date\"] ? \"\" : (pm.variables.get(\"header_date\") || \"\"),",
@@ -541,7 +536,7 @@
 					"    let value = pm.request.getHeaders({ ignoreCase: true, enabled: true })[key];",
 					"    ",
 					"    // Populate variables",
-					"    value = substituteEnvVars(value);",
+					"    value = pm.variables.replaceIn(value);",
 					"    ",
 					"    // Replace whitespace in value but not if its within quotes",
 					"    if (!value.startsWith(\"\\\"\")) {",
@@ -607,25 +602,25 @@
 	],
 	"variable": [
 		{
-			"id": "c5d71504-9c05-4d24-a5a8-bb1151ff6495",
+			"id": "ee93e347-8e27-4d86-806c-ae9707957862",
 			"key": "azure_storage_account",
 			"value": "<storage_account>",
 			"type": "string"
 		},
 		{
-			"id": "9c56e7c7-2a5d-4597-b111-31646189f7ea",
+			"id": "b0b30bd3-d287-4c0a-9e10-701f8400e936",
 			"key": "azure_storage_key",
 			"value": "<storage_key>",
 			"type": "string"
 		},
 		{
-			"id": "245b3938-faaf-4b96-9f7d-0c2fdb773758",
+			"id": "77202a34-82d3-4ce6-a6a1-77ee98ad4d98",
 			"key": "header_date",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "3b5b8da4-5232-4e8a-9b62-e633ae694d87",
+			"id": "d211432e-67bb-4cce-a8ab-3a6b6a7b7e9c",
 			"key": "header_authorization",
 			"value": "",
 			"type": "string"
