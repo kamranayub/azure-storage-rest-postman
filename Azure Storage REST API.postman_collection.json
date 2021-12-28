@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f279697b-ff90-4f56-bd89-6b81e46cf2e3",
+		"_postman_id": "df7209f2-a359-48a2-a1ac-593622bd5aac",
 		"name": "Azure Storage REST API",
 		"description": "Methods to set, list, and remove properties for Azure Storage accounts via the Azure REST API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -12,7 +12,6 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "3d8a3bc5-d4f2-4583-bab1-2385cdf953f5",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -119,6 +118,164 @@
 			"response": []
 		},
 		{
+			"name": "Upload Blob",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-ms-date",
+						"value": "{{header_date}}",
+						"type": "text"
+					},
+					{
+						"key": "x-ms-blob-type",
+						"value": "BlockBlob",
+						"type": "text"
+					},
+					{
+						"key": "x-ms-version",
+						"value": "2018-03-28",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "uploaded from postman!"
+				},
+				"url": {
+					"raw": "https://{{azure_storage_account}}.blob.core.windows.net/{{azure_storage_container}}/upload.txt",
+					"protocol": "https",
+					"host": [
+						"{{azure_storage_account}}",
+						"blob",
+						"core",
+						"windows",
+						"net"
+					],
+					"path": [
+						"{{azure_storage_container}}",
+						"upload.txt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Blob List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{azure_storage_account}}.blob.core.windows.net/{{azure_storage_container}}?restype=container&comp=list",
+					"protocol": "https",
+					"host": [
+						"{{azure_storage_account}}",
+						"blob",
+						"core",
+						"windows",
+						"net"
+					],
+					"path": [
+						"{{azure_storage_container}}"
+					],
+					"query": [
+						{
+							"key": "restype",
+							"value": "container"
+						},
+						{
+							"key": "comp",
+							"value": "list"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Blob",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{header_authorization}}",
+						"type": "text"
+					},
+					{
+						"key": "x-ms-date",
+						"value": "{{header_date}}",
+						"type": "text"
+					},
+					{
+						"key": "x-ms-version",
+						"value": "2018-03-28",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{azure_storage_account}}.blob.core.windows.net/{{azure_storage_container}}/upload.txt",
+					"protocol": "https",
+					"host": [
+						"{{azure_storage_account}}",
+						"blob",
+						"core",
+						"windows",
+						"net"
+					],
+					"path": [
+						"{{azure_storage_container}}",
+						"upload.txt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Blob",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-ms-date",
+						"value": "{{header_date}}",
+						"type": "text"
+					},
+					{
+						"key": "x-ms-version",
+						"value": "2018-03-28",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{header_authorization}}",
+						"type": "text"
+					},
+					{
+						"key": "x-ms-version",
+						"value": "2018-03-28",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{azure_storage_account}}.blob.core.windows.net/{{azure_storage_container}}/upload.txt",
+					"protocol": "https",
+					"host": [
+						"{{azure_storage_account}}",
+						"blob",
+						"core",
+						"windows",
+						"net"
+					],
+					"path": [
+						"{{azure_storage_container}}",
+						"upload.txt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Preflight Blob Request",
 			"request": {
 				"method": "OPTIONS",
@@ -173,8 +330,7 @@
 						"header": [
 							{
 								"key": "x-ms-date",
-								"value": "{{header_date}}",
-								"disabled": false
+								"value": "{{header_date}}"
 							},
 							{
 								"key": "Authorization",
@@ -183,18 +339,15 @@
 							},
 							{
 								"key": "x-ms-version",
-								"value": "2018-03-28",
-								"disabled": false
+								"value": "2018-03-28"
 							},
 							{
 								"key": "Origin",
-								"value": "http://localhost:5000",
-								"disabled": false
+								"value": "http://localhost:5000"
 							},
 							{
 								"key": "Access-Control-Request-Method",
-								"value": "GET",
-								"disabled": false
+								"value": "GET"
 							}
 						],
 						"body": {
@@ -286,8 +439,7 @@
 						"header": [
 							{
 								"key": "x-ms-date",
-								"value": "{{header_date}}",
-								"disabled": false
+								"value": "{{header_date}}"
 							},
 							{
 								"key": "Authorization",
@@ -296,23 +448,19 @@
 							},
 							{
 								"key": "x-ms-version",
-								"value": "2018-03-28",
-								"disabled": false
+								"value": "2018-03-28"
 							},
 							{
 								"key": "Origin",
-								"value": "http://localhost:5000",
-								"disabled": false
+								"value": "http://localhost:5000"
 							},
 							{
 								"key": "Access-Control-Request-Method",
-								"value": "GET",
-								"disabled": false
+								"value": "GET"
 							},
 							{
 								"key": "Access-Control-Request-Headers",
-								"value": "x-app-neat-header",
-								"disabled": false
+								"value": "x-app-neat-header"
 							}
 						],
 						"body": {
@@ -392,8 +540,7 @@
 						"header": [
 							{
 								"key": "x-ms-date",
-								"value": "{{header_date}}",
-								"disabled": false
+								"value": "{{header_date}}"
 							},
 							{
 								"key": "Authorization",
@@ -402,18 +549,15 @@
 							},
 							{
 								"key": "x-ms-version",
-								"value": "2018-03-28",
-								"disabled": false
+								"value": "2018-03-28"
 							},
 							{
 								"key": "Origin",
-								"value": "http://contoso.com",
-								"disabled": false
+								"value": "http://contoso.com"
 							},
 							{
 								"key": "Access-Control-Request-Method",
-								"value": "HEAD",
-								"disabled": false
+								"value": "HEAD"
 							}
 						],
 						"body": {
@@ -493,35 +637,35 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "d25d987b-a9a5-4b4c-a1a3-54ac508b8bf5",
 				"type": "text/javascript",
 				"exec": [
 					"const crypto = require(\"crypto-js\");",
 					"",
 					"// Set Date header value for authorization",
 					"// Should be UTC GMT string",
-					"pm.variables.set(\"header_date\", new Date().toUTCString());",
+					"pm.collectionVariables.set(\"header_date\", new Date().toUTCString());",
 					"",
 					"// Get hash of all header-name:value",
 					"const headers = pm.request.getHeaders({ ignoreCase: true, enabled: true });",
+					"",
+					"// Regexp for replacing parameters in query",
+					"const paramsCatcher = /{{([a-zA-Z0-9-_]*)}}/g",
 					"",
 					"// Construct Signature value for Authorization header",
 					"var signatureParts = [",
 					"    pm.request.method.toUpperCase(),",
 					"    headers[\"content-encoding\"] || \"\",",
 					"    headers[\"content-language\"] || \"\",",
-					"    headers[\"content-length\"]  || \"\",",
-					"//    pm.request.body ? pm.request.body.toString().length || \"\" : \"\",",
+					"    headers[\"content-length\"]  ||  pm.request.body ? pm.request.body.toString().length || \"\" : \"\",",
 					"    headers[\"content-md5\"] || \"\",",
 					"    headers[\"content-type\"] || \"\",",
-					"    headers[\"x-ms-date\"] ? \"\" : (pm.variables.get(\"header_date\") || \"\"),",
+					"    headers[\"x-ms-date\"] ? \"\" : (pm.collectionVariables.get(\"header_date\") || \"\"),",
 					"    headers[\"if-modified-since\"] || \"\",",
 					"    headers[\"if-match\"] || \"\",",
 					"    headers[\"if-none-match\"] || \"\",",
 					"    headers[\"if-unmodified-since\"] || \"\",",
 					"    headers[\"range\"] || \"\"",
 					"];",
-					"",
 					"// Construct CanonicalizedHeaders",
 					"const canonicalHeaderNames = [];",
 					"Object.keys(headers).forEach(key => {",
@@ -537,7 +681,7 @@
 					"    let value = pm.request.getHeaders({ ignoreCase: true, enabled: true })[key];",
 					"    ",
 					"    // Populate variables",
-					"    value = pm.variables.replaceIn(value);",
+					"    value = pm.collectionVariables.replaceIn(value);",
 					"    ",
 					"    // Replace whitespace in value but not if its within quotes",
 					"    if (!value.startsWith(\"\\\"\")) {",
@@ -551,8 +695,14 @@
 					"signatureParts.push.apply(signatureParts, canonicalHeaderParts);",
 					"",
 					"// Construct CanonicalizedResource",
+					"let requestURL = pm.request.url.getPath();",
+					"const paramsMatch = [...requestURL.matchAll(paramsCatcher)];",
+					"paramsMatch.forEach((match) => {",
+					"    requestURL = requestURL.replace(match[0], pm.collectionVariables.get(match[1]));",
+					"})",
+					"",
 					"const canonicalResourceParts = [",
-					"    `/${pm.variables.get(\"azure_storage_account\")}${pm.request.url.getPath()}`",
+					"    `/${pm.collectionVariables.get(\"azure_storage_account\")}${requestURL}`",
 					"];",
 					"const canonicalQueryNames = [];",
 					"pm.request.url.query.each(query => {",
@@ -560,8 +710,13 @@
 					"});",
 					"canonicalQueryNames.sort();",
 					"canonicalQueryNames.forEach(queryName => {",
-					"    const value = pm.request.url.query.get(queryName);",
+					"    let value = pm.request.url.query.get(queryName);",
 					"    ",
+					"    const paramsMatch = [...value.matchAll(paramsCatcher)]",
+					"    paramsMatch.forEach((match) => {",
+					"        value = pm.collectionVariables.get(match[1]);",
+					"    })",
+					"",
 					"    // NOTE: This does not properly explode multiple same query params' values",
 					"    // and turn them into comma-separated list",
 					"    canonicalResourceParts.push(`${queryName}:${value}`);",
@@ -577,23 +732,22 @@
 					"console.log(\"Signature String\", JSON.stringify(signatureRaw));",
 					"",
 					"// Hash it using HMAC-SHA256 and then encode using base64",
-					"const storageKey = pm.variables.get(\"azure_storage_key\");",
+					"const storageKey = pm.collectionVariables.get(\"azure_storage_key\");",
 					"const signatureBytes = crypto.HmacSHA256(signatureRaw, crypto.enc.Base64.parse(storageKey));",
 					"const signatureEncoded = signatureBytes.toString(crypto.enc.Base64);",
 					"",
-					"console.log(\"Storage Account\", pm.variables.get(\"azure_storage_account\"));",
+					"console.log(\"Storage Account\", pm.collectionVariables.get(\"azure_storage_account\"));",
 					"console.log(\"Storage Key\", storageKey);",
 					"",
 					"// Finally, make it available for headers",
-					"pm.variables.set(\"header_authorization\", ",
-					"    `SharedKey ${pm.variables.get(\"azure_storage_account\")}:${signatureEncoded}`);"
+					"pm.collectionVariables.set(\"header_authorization\", ",
+					"    `SharedKey ${pm.collectionVariables.get(\"azure_storage_account\")}:${signatureEncoded}`);"
 				]
 			}
 		},
 		{
 			"listen": "test",
 			"script": {
-				"id": "fd3cd723-7868-470e-802c-eedf08a19c24",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -603,28 +757,24 @@
 	],
 	"variable": [
 		{
-			"id": "ee93e347-8e27-4d86-806c-ae9707957862",
 			"key": "azure_storage_account",
-			"value": "<storage_account>",
-			"type": "string"
+			"value": "<storage_account>"
 		},
 		{
-			"id": "b0b30bd3-d287-4c0a-9e10-701f8400e936",
 			"key": "azure_storage_key",
-			"value": "<storage_key>",
-			"type": "string"
+			"value": "<storage_key>"
 		},
 		{
-			"id": "77202a34-82d3-4ce6-a6a1-77ee98ad4d98",
+			"key": "azure_storage_container",
+			"value": "<container_name>"
+		},
+		{
 			"key": "header_date",
-			"value": "",
-			"type": "string"
+			"value": ""
 		},
 		{
-			"id": "d211432e-67bb-4cce-a8ab-3a6b6a7b7e9c",
 			"key": "header_authorization",
-			"value": "",
-			"type": "string"
+			"value": ""
 		}
 	]
 }
