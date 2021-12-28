@@ -136,11 +136,27 @@
 						"key": "x-ms-version",
 						"value": "2018-03-28",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{header_authorization}}",
+						"type": "text"
+					},
+					{
+						"key": "content-type",
+						"value": "text/plain",
+						"description": "Explicit content-type needed for the pre-request script",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "uploaded from postman!"
+					"raw": "uploaded from postman!",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
 				},
 				"url": {
 					"raw": "https://{{azure_storage_account}}.blob.core.windows.net/{{azure_storage_container}}/upload.txt",
@@ -164,7 +180,23 @@
 			"name": "Get Blob List",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{header_authorization}}",
+						"type": "text"
+					},
+					{
+						"key": "x-ms-date",
+						"value": "{{header_date}}",
+						"type": "text"
+					},
+					{
+						"key": "x-ms-version",
+						"value": "2018-03-28",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "https://{{azure_storage_account}}.blob.core.windows.net/{{azure_storage_container}}?restype=container&comp=list",
 					"protocol": "https",
@@ -249,11 +281,6 @@
 					{
 						"key": "Authorization",
 						"value": "{{header_authorization}}",
-						"type": "text"
-					},
-					{
-						"key": "x-ms-version",
-						"value": "2018-03-28",
 						"type": "text"
 					}
 				],
