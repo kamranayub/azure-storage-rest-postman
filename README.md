@@ -14,9 +14,12 @@ To use the collection:
 1. Edit the new collection using the "..." menu
 1. Go to the **Variables** tab
 1. Fill in the variables for:
-   - *azure_storage_account* - Your Azure Storage account name
-   - *azure_storage_key* - Your secret Storage key
+   - _azure_storage_account_ - Your Azure Storage account name
+   - _azure_storage_key_ - Your secret Storage key
+   - _azure_storage_container_ - Your blob storage container name
 
-These two variable values can be found in the Azure Portal for your storage account. The rest of the variables will be filled in automatically.
+The first two variable values can be found in the Azure Portal for your storage account (navigate to the container in question, then select _Access keys_ on the left hand menu and tap _Show keys_).
+
+The _azure_storage_container_ variable specifies name of your blob storage container to be used in Upload/Get/Delete blob requests. The rest of the variables will be filled in automatically.
 
 See [Azure Storage REST API docs](https://docs.microsoft.com/en-us/rest/api/storageservices/)
